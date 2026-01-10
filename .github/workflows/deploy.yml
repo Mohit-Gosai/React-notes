@@ -2,54 +2,53 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: "main"
+    branches:
+      - main
 
 permissions:
   contents: read
   pages: write
   id-token: write
 
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
 jobs:
-  build_site:
+  build:
     runs-on: ubuntu-latest
+
+    # 👇 THIS IS THE FIX
+    defaults:
+      run:
+        working-directory: React-notes
+
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Install Node.js
+
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 18
+          cache: "npm"
+          cache-dependency-path: React-notes/package-lock.json
+
       - name: Install dependencies
-        run: npm ci
-      - name: Debug node modules and vite temp config
-        run: |
-          echo "--- node_modules/@vitejs ---"
-          ls -la node_modules/@vitejs || true
-          echo "--- node_modules/.vite-temp (if present) ---"
-          ls -la node_modules/.vite-temp || true
-          echo "--- dump .vite-temp vite configs (first 200 lines) ---"
-          if [ -d node_modules/.vite-temp ]; then
-            for f in node_modules/.vite-temp/*.mjs; do
-              echo "== file: $f ==";
-              sed -n '1,200p' "$f" || true;
-            done
-          else
-            echo "no .vite-temp directory"
-          fi
-      - name: Build
+        run: npm install
+
+      - name: Build project
         run: npm run build
-      - name: Upload Artifacts
+
+      - name: Upload build artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist
+          path: React-notes/dist
 
   deploy:
-    needs: build_site
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+    needs: build
+
     steps:
-      - name: Deploy
-        id: deployment
+      - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
