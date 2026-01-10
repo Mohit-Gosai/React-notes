@@ -1,0 +1,8 @@
+{
+  "name": "@vitejs/react-swc",
+  "version": "0.0.0-shim",
+  "type": "module",
+  "main": "index.js",
+  "description": "Local shim for @vitejs/react-swc to satisfy CI temporary import",
+  "license": "MIT"
+}
