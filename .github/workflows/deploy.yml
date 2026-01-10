@@ -18,11 +18,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    #  THIS IS THE FIX
-    defaults:
-      run:
-        working-directory: React-notes
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -31,8 +26,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18
-          cache: "npm"
-          cache-dependency-path: React-notes/package-lock.json
 
       - name: Install dependencies
         run: npm install
@@ -43,7 +36,7 @@ jobs:
       - name: Upload build artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: React-notes/dist
+          path: dist
 
   deploy:
     runs-on: ubuntu-latest
