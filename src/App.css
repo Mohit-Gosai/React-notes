@@ -1,0 +1,177 @@
+/* ---------- MODERN CSS RESET & VARIABLES ---------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg-main: #0f172a;
+  --bg-secondary: #020617;
+  --bg-card: #1e293b66;
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --accent: #38bdf8;
+  --accent-soft: rgba(56, 189, 248, 0.1);
+  --border: #1e293b;
+  --sidebar-width: 260px;
+  --header-height: 70px;
+  --max-content-width: 1000px;
+}
+
+body {
+  font-family: "Inter", system-ui, sans-serif;
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ---------- APP LAYOUT ---------- */
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.header {
+  height: var(--header-height);
+  padding: 0 2rem;
+  background: rgba(2, 6, 23, 0.8);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header h1 {
+  font-size: 1.25rem;
+  color: var(--accent);
+}
+
+header button {
+  color: var(--text-primary);
+  background: var(--bg-main);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.5rem;
+  cursor: pointer;
+  display: none; /* Hidden on desktop */
+}
+
+/* ---------- MAIN & SIDEBAR ---------- */
+.main {
+  flex: 1;
+  display: flex;
+  position: relative;
+}
+
+.sidebar {
+  width: var(--sidebar-width);
+  background: var(--bg-secondary);
+  border-right: 1px solid var(--border);
+  padding: 1.5rem 1rem;
+  overflow-y: auto;
+  transition: transform 0.3s ease-in-out;
+  flex-shrink: 0;
+}
+
+.sidebar h3 {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin: 1.5rem 0.8rem 0.5rem;
+}
+
+.sidebar a {
+  display: flex;
+  align-items: center;
+  padding: 0.6rem 0.8rem;
+  margin-bottom: 0.2rem;
+  border-radius: 8px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: all 0.2s;
+}
+
+.sidebar a:hover {
+  background: var(--bg-main);
+  color: var(--text-primary);
+}
+
+.sidebar a.active {
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 500;
+}
+
+/* ---------- CONTENT AREA ---------- */
+.content {
+  flex: 1;
+  padding: 2.5rem;
+  overflow-x: hidden;
+}
+
+.content-inner {
+  max-width: var(--max-content-width);
+  margin: 0 auto;
+}
+
+/* ---------- RESPONSIVE LOGIC ---------- */
+@media (max-width: 900px) {
+  header button {
+    display: flex; /* Show toggle on mobile */
+  }
+
+  .sidebar {
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    bottom: 0;
+    z-index: 99;
+    transform: translateX(-100%); /* Hide off-screen */
+  }
+
+  /* When JS toggles the class */
+  .menu-active .sidebar {
+    transform: translateX(0);
+    box-shadow: 10px 0 15px rgba(0,0,0,0.3);
+  }
+
+  .content {
+    padding: 1.5rem;
+  }
+}
+
+/* ---------- CODE & TABLES (Overflow Fixes) ---------- */
+pre {
+  background: #000;
+  border: 1px solid var(--border);
+  padding: 1.25rem;
+  border-radius: 12px;
+  margin: 2rem 0;
+  overflow-x: auto;
+}
+
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2rem 0;
+  display: block; /* Allows horizontal scroll on mobile */
+  overflow-x: auto;
+}
+
+/* ---------- FOOTER ---------- */
+footer {
+  padding: 3rem 2rem;
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
