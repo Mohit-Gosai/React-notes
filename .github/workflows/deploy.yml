@@ -18,7 +18,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    # 👇 THIS IS THE FIX
+    #  THIS IS THE FIX
     defaults:
       run:
         working-directory: React-notes
