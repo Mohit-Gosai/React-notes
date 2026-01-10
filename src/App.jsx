@@ -32,7 +32,8 @@ function App() {
             <div className="content">
               <div className="content-inner">
                 <Routes>
-                  <Route path="/" element={<Introduction />} />
+                  <Route index element={<Introduction />} />
+
                   <Route path="/jsx" element={<JSXPage />} />
                   <Route path="/components" element={<ComponentsPage />} />
                   <Route path="/props" element={<PropsPage />} />

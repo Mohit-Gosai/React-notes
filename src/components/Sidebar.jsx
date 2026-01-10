@@ -5,7 +5,7 @@ function Sidebar() {
   return (
     <aside className="sidebar">
       <h3>Kick Start</h3>
-      <NavLink to="/">Introduction</NavLink>
+      <NavLink to=".">Introduction</NavLink>
       <NavLink to="/jsx">JSX</NavLink>
       <NavLink to="/components">Components</NavLink>
       <NavLink to="/props">Props</NavLink>
