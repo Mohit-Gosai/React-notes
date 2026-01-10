@@ -18,6 +18,16 @@
   --sidebar-width: 260px;
   --header-height: 70px;
   --max-content-width: 1000px;
+  /* Code theme palette */
+  --code-bg: linear-gradient(180deg, #071226 0%, #00121a 100%);
+  --code-border: rgba(255,255,255,0.04);
+  --code-text: #e6eef6;
+  --code-comment: #6b7280;
+  --code-keyword: #c084fc;
+  --code-function: #60a5fa;
+  --code-string: #34d399;
+  --code-number: #f472b6;
+  --code-attr: #f59e0b;
 }
 
 body {
@@ -54,7 +64,7 @@ body {
   color: var(--accent);
 }
 
-header button {
+.header button {
   color: var(--text-primary);
   background: var(--bg-main);
   border: 1px solid var(--border);
@@ -67,18 +77,28 @@ header button {
 /* ---------- MAIN & SIDEBAR ---------- */
 .main {
   flex: 1;
-  display: flex;
+  display: grid;
+  grid-template-columns: var(--sidebar-width) 1fr;
   position: relative;
+  align-items: stretch;
+  min-height: calc(100vh - var(--header-height));
+  column-gap: 2.5rem; /* add horizontal gap between sidebar and content */
 }
 
 .sidebar {
   width: var(--sidebar-width);
   background: var(--bg-secondary);
   border-right: 1px solid var(--border);
-  padding: 1.5rem 1rem;
+  padding: 1.5rem 1.5rem;
   overflow-y: auto;
   transition: transform 0.3s ease-in-out;
-  flex-shrink: 0;
+  align-self: stretch;
+}
+
+.content-area {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .sidebar h3 {
@@ -115,13 +135,32 @@ header button {
 /* ---------- CONTENT AREA ---------- */
 .content {
   flex: 1;
-  padding: 2.5rem;
+  padding: 3.5rem 3rem; /* increased vertical + horizontal gutters */
   overflow-x: hidden;
 }
 
 .content-inner {
-  max-width: var(--max-content-width);
+  max-width: 1100px; /* slightly wider for breathing room */
   margin: 0 auto;
+  padding: 0 2rem; /* larger inner gutter */
+}
+
+/* Heading emphasis inside content */
+.content h1 {
+  font-size: 2rem;
+  color: var(--text-primary);
+  margin: 0 0 1rem 0;
+  display: inline-block;
+  padding: 0.25rem 0.6rem;
+  border-left: 4px solid var(--accent);
+  background: linear-gradient(90deg, rgba(56,189,248,0.04), transparent);
+  border-radius: 6px;
+}
+
+.content h2 {
+  color: var(--accent);
+  margin-top: 1.6rem;
+  margin-bottom: 0.75rem;
 }
 
 /* ---------- RESPONSIVE LOGIC ---------- */
@@ -151,13 +190,92 @@ header button {
 }
 
 /* ---------- CODE & TABLES (Overflow Fixes) ---------- */
+/* ---------- CODE & TABLES (Overflow Fixes) ---------- */
 pre {
-  background: #000;
-  border: 1px solid var(--border);
-  padding: 1.25rem;
+  background: var(--code-bg);
+  border: 1px solid var(--code-border);
+  padding: 1.25rem 1.5rem;
   border-radius: 12px;
   margin: 2rem 0;
-  overflow-x: auto;
+  overflow: auto;
+  position: relative;
+  box-shadow: 0 8px 30px rgba(2,6,23,0.6);
+}
+
+pre code {
+  display: block;
+  font-family: 'Fira Code', 'Source Code Pro', ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', monospace;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--code-text);
+  tab-size: 2;
+}
+
+/* inline code */
+code {
+  background: rgba(255,255,255,0.02);
+  padding: 0.12rem 0.4rem;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 0.95em;
+}
+
+/* copy button (requires small JS to function) */
+.copy-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.03);
+  color: var(--text-secondary);
+  padding: 6px 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.82rem;
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  transition: all 0.12s ease;
+}
+
+.copy-btn:hover {
+  background: rgba(255,255,255,0.06);
+  color: var(--text-primary);
+  transform: translateY(-1px);
+}
+
+/* Prism-like token colors (works if you use a syntax highlighter that outputs these classes) */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: var(--code-comment);
+  font-style: italic;
+}
+.token.keyword,
+.token.boolean,
+.token.selector,
+.token.important {
+  color: var(--code-keyword);
+}
+.token.function,
+.token.class-name {
+  color: var(--code-function);
+}
+.token.string,
+.token.char,
+.token.attr-value {
+  color: var(--code-string);
+}
+.token.number {
+  color: var(--code-number);
+}
+.token.attr-name {
+  color: var(--code-attr);
+}
+.token.punctuation,
+.token.operator {
+  color: var(--text-muted);
 }
 
 .comparison-table {

@@ -11,7 +11,7 @@ import StatePage from "./Pages/StatePage.jsx";
 import HooksPage from "./Pages/HooksPage.jsx";
 import ReactRouterPage from "./Pages/ReactRouterPage.jsx";
 import DataFlowPage from "./Pages/core-concepts/DataFlowPage.jsx";
-import ComponentLifecyclePage from "./Pages/core-concepts/ComponentLifeCyclePage.jsx";
+import ComponentLifecyclePage from "./Pages/core-concepts/ComponentLifecyclePage.jsx";
 import StateVsPropsPage from "./Pages/core-concepts/StateVsPropsPage.jsx";
 import RenderingVirtualDOMPage from "./Pages/core-concepts/RenderingVirtualDOMPage.jsx";
 import ControlledComponentsPage from "./Pages/core-concepts/ControlledComponentsPage.jsx";
