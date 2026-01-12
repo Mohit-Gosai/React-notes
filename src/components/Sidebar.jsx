@@ -6,12 +6,12 @@ function Sidebar() {
     <aside className="sidebar">
       <h3>Kick Start</h3>
       <Link to="">Introduction</Link>
-      <Link to="/jsx">JSX</Link>
-      <Link to="/components">Components</Link>
-      <Link to="/props">Props</Link>
-      <Link to="/state">State</Link>
-      <Link to="/hooks">Hooks</Link>
-      <Link to="/react-routes">React Router DOM</Link>
+      <Link to="/jsxPage">JSX</Link>
+      <Link to="/componentsPage">Components</Link>
+      <Link to="/propsPage">Props</Link>
+      <Link to="/statePage">State</Link>
+      <Link to="/hooksPage">Hooks</Link>
+      <Link to="/reactRouterPage">React Router DOM</Link>
       <h3>Core Concepts</h3>
       <Link to="/data-flow">Data Flow</Link>
       <Link to="/component-lifecycle">Conponent Lifecycle</Link>

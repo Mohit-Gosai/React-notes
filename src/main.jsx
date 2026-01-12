@@ -18,30 +18,29 @@ import RenderingVirtualDOMPage from "./Pages/core-concepts/RenderingVirtualDOMPa
 import ControlledComponentsPage from "./Pages/core-concepts/ControlledComponentsPage.jsx";
 
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />,
-    children: [
-      { index: true, element: <Introduction />},
-      { path: "JSXPage", element: <HtMLJsPage />},
-      { path: "ComponentsPage", element: <ComponentsPage />},
-      { path: "PropsPage", element: <PropsPage />},
-      { path: "StatePage", element: <StatePage />},
-      { path: "HooksPage", element: <HooksPage />},
-      { path: "ReactRouterPage", element: <ReactRouterPage />},   
-      { path: "data-flow", element: <DataFlowPage />},
-      { path: "component-lifecycle", element: <ComponentLifecyclePage />},
-      { path: "state-vs-props", element: <StateVsPropsPage />},
-      { path: "rendering-virtual-dom", element: <RenderingVirtualDOMPage />},
-      { path: "controlled-components", element: <ControlledComponentsPage />},
-      { path: "state-vs-props", element: <StateVsPropsPage />},      
-      { path: "rendering-virtual-dom", element: <RenderingVirtualDOMPage />},
-      { path: "controlled-components", element: <ControlledComponentsPage />},
-      { basename: "/React-notes" },
-    ]
-  },
-]);
+const router = createBrowserRouter(
+  [
+    {
+      path: "/",
+      element: <App />,
+      children: [
+        { index: true, element: <Introduction /> },
+        { path: "JSXPage", element: <HtMLJsPage /> },
+        { path: "ComponentsPage", element: <ComponentsPage /> },
+        { path: "PropsPage", element: <PropsPage /> },
+        { path: "StatePage", element: <StatePage /> },
+        { path: "HooksPage", element: <HooksPage /> },
+        { path: "ReactRouterPage", element: <ReactRouterPage /> },
+        { path: "data-flow", element: <DataFlowPage /> },
+        { path: "component-lifecycle", element: <ComponentLifecyclePage /> },
+        { path: "state-vs-props", element: <StateVsPropsPage /> },
+        { path: "rendering-virtual-dom", element: <RenderingVirtualDOMPage /> },
+        { path: "controlled-components", element: <ControlledComponentsPage /> },
+      ],
+    },
+  ],
+  { basename: "/React-notes" }
+);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
     <RouterProvider router={router} />
