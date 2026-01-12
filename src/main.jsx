@@ -39,6 +39,7 @@ const router = createBrowserRouter([
       { path: "state-vs-props", element: <StateVsPropsPage />},      
       { path: "rendering-virtual-dom", element: <RenderingVirtualDOMPage />},
       { path: "controlled-components", element: <ControlledComponentsPage />},
+      { basename: "/React-notes" },
     ]
   },
 ]);
