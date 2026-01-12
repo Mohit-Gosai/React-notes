@@ -1,24 +1,23 @@
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Sidebar() {
   
   return (
     <aside className="sidebar">
       <h3>Kick Start</h3>
-      <NavLink to="">Introduction</NavLink>
-      <NavLink to="/jsx">JSX</NavLink>
-      <NavLink to="/components">Components</NavLink>
-      <NavLink to="/props">Props</NavLink>
-      <NavLink to="/state">State</NavLink>
-      <NavLink to="/hooks">Hooks</NavLink>
-      <NavLink to="/react-routes">React Router DOM</NavLink>
+      <Link to="">Introduction</Link>
+      <Link to="/jsx">JSX</Link>
+      <Link to="/components">Components</Link>
+      <Link to="/props">Props</Link>
+      <Link to="/state">State</Link>
+      <Link to="/hooks">Hooks</Link>
+      <Link to="/react-routes">React Router DOM</Link>
       <h3>Core Concepts</h3>
-      <NavLink to="/data-flow">Data Flow</NavLink>
-      <NavLink to="/component-lifecycle">Conponent Lifecycle</NavLink>
-      <NavLink to="/state-vs-props" >State VS Props</NavLink>
-      <NavLink to="/rendering-virtual-dom">Rendering & Virtual DOM</NavLink>
-      <NavLink to="/controlled-components">Controlled Components</NavLink>
-
+      <Link to="/data-flow">Data Flow</Link>
+      <Link to="/component-lifecycle">Conponent Lifecycle</Link>
+      <Link to="/state-vs-props" >State VS Props</Link>
+      <Link to="/rendering-virtual-dom">Rendering & Virtual DOM</Link>
+      <Link to="/controlled-components">Controlled Components</Link>
     </aside>
   );
 }
