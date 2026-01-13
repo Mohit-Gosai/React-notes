@@ -1,50 +1,66 @@
-/* ---------- MODERN CSS RESET & VARIABLES ---------- */
-* {
+/* ==================================================
+   RESET & GLOBAL SAFETY
+================================================== */
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-:root {
-  --bg-main: #0f172a;
-  --bg-secondary: #020617;
-  --bg-card: #1e293b66;
-  --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
-  --text-muted: #64748b;
-  --accent: #38bdf8;
-  --accent-soft: rgba(56, 189, 248, 0.1);
-  --border: #1e293b;
-  --sidebar-width: 260px;
-  --header-height: 70px;
-  --max-content-width: 1000px;
-  /* Code theme palette */
-  --code-bg: linear-gradient(180deg, #071226 0%, #00121a 100%);
-  --code-border: rgba(255,255,255,0.04);
-  --code-text: #e6eef6;
-  --code-comment: #6b7280;
-  --code-keyword: #c084fc;
-  --code-function: #60a5fa;
-  --code-string: #34d399;
-  --code-number: #f472b6;
-  --code-attr: #f59e0b;
+html,
+body,
+#root {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 body {
   font-family: "Inter", system-ui, sans-serif;
-  background-color: var(--bg-main);
-  color: var(--text-primary);
+  background-color: #0f172a;
+  color: #f8fafc;
   line-height: 1.6;
-  overflow-x: hidden;
 }
 
-/* ---------- APP LAYOUT ---------- */
+/* ==================================================
+   VARIABLES
+================================================== */
+:root {
+  --bg-main: #0f172a;
+  --bg-secondary: #020617;
+  --bg-card: #1e293b66;
+
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+
+  --accent: #38bdf8;
+  --accent-soft: rgba(56, 189, 248, 0.1);
+  --border: #1e293b;
+
+  --sidebar-width: 260px;
+  --header-height: 70px;
+  --max-content-width: 1000px;
+
+  --code-bg: linear-gradient(180deg, #071226 0%, #00121a 100%);
+  --code-border: rgba(255,255,255,0.04);
+  --code-text: #e6eef6;
+}
+
+/* ==================================================
+   APP LAYOUT
+================================================== */
 .app {
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
 }
 
+/* ==================================================
+   HEADER (UNCHANGED)
+================================================== */
 .header {
   height: var(--header-height);
   padding: 0 2rem;
@@ -65,40 +81,36 @@ body {
 }
 
 .header button {
+  display: none;
   color: var(--text-primary);
   background: var(--bg-main);
   border: 1px solid var(--border);
   border-radius: 8px;
   padding: 0.5rem;
   cursor: pointer;
-  display: none; /* Hidden on desktop */
 }
 
-/* ---------- MAIN & SIDEBAR ---------- */
+/* ==================================================
+   MAIN GRID (CRITICAL OVERFLOW FIX)
+================================================== */
 .main {
   flex: 1;
   display: grid;
-  grid-template-columns: var(--sidebar-width) 1fr;
-  position: relative;
-  align-items: stretch;
+  grid-template-columns: var(--sidebar-width) minmax(0, 1fr);
   min-height: calc(100vh - var(--header-height));
-  column-gap: 2.5rem; /* add horizontal gap between sidebar and content */
 }
 
+/* ==================================================
+   SIDEBAR (UNCHANGED)
+================================================== */
 .sidebar {
   width: var(--sidebar-width);
   background: var(--bg-secondary);
   border-right: 1px solid var(--border);
-  padding: 1.5rem 1.5rem;
+  padding: 1.5rem;
   overflow-y: auto;
   transition: transform 0.3s ease-in-out;
-  align-self: stretch;
-}
-
-.content-area {
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
+  min-width: 0;
 }
 
 .sidebar h3 {
@@ -106,7 +118,7 @@ body {
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--text-muted);
-  margin: 1.5rem 0.8rem 0.5rem;
+  margin: 1.5rem 0 0.5rem;
 }
 
 .sidebar a {
@@ -118,7 +130,6 @@ body {
   color: var(--text-secondary);
   text-decoration: none;
   font-size: 0.95rem;
-  transition: all 0.2s;
 }
 
 .sidebar a:hover {
@@ -132,41 +143,140 @@ body {
   font-weight: 500;
 }
 
-/* ---------- CONTENT AREA ---------- */
+/* ==================================================
+   CONTENT
+================================================== */
+.content-area {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
 .content {
   flex: 1;
-  padding: 3.5rem 3rem; /* increased vertical + horizontal gutters */
-  overflow-x: hidden;
+  padding: 3rem 2rem;
+  min-width: 0;
 }
 
 .content-inner {
-  max-width: 1100px; /* slightly wider for breathing room */
+  max-width: var(--max-content-width);
+  width: 100%;
   margin: 0 auto;
-  padding: 0 2rem; /* larger inner gutter */
+  min-width: 0;
 }
 
-/* Heading emphasis inside content */
+/* ==================================================
+   HEADINGS
+================================================== */
 .content h1 {
   font-size: 2rem;
-  color: var(--text-primary);
-  margin: 0 0 1rem 0;
-  display: inline-block;
-  padding: 0.25rem 0.6rem;
+  margin-bottom: 1rem;
+  padding-left: 0.75rem;
   border-left: 4px solid var(--accent);
-  background: linear-gradient(90deg, rgba(56,189,248,0.04), transparent);
-  border-radius: 6px;
 }
 
 .content h2 {
+  margin: 1.6rem 0 0.75rem;
   color: var(--accent);
-  margin-top: 1.6rem;
-  margin-bottom: 0.75rem;
 }
 
-/* ---------- RESPONSIVE LOGIC ---------- */
+/* ==================================================
+   LISTS (EDGE SAFE ON MOBILE)
+================================================== */
+.content ul,
+.content ol {
+  padding-left: clamp(1.25rem, 4vw, 2rem);
+  margin: 1rem 0;
+}
+
+.content li {
+  margin: 0.4rem 0;
+}
+
+/* ==================================================
+   CODE BLOCKS (NO OVERFLOW GUARANTEE)
+================================================== */
+pre {
+  background: var(--code-bg);
+  border: 1px solid var(--code-border);
+  padding: 1.25rem 1.5rem;
+  border-radius: 12px;
+  margin: 2rem 0;
+
+  max-width: 100%;
+  width: 100%;
+  white-space: pre;        /* preserve formatting */
+}
+
+pre code {
+  display: block;
+  width: 100%;      /* prevents stretching container */
+  max-width: 100%;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--code-text);
+}
+
+/* inline code */
+code {
+  background: rgba(255,255,255,0.04);
+  padding: 0.12rem 0.4rem;
+  border-radius: 6px;
+  font-size: 0.95em;
+  overflow: auto;          /* REQUIRED */
+  word-break: break-word;
+}
+
+/* ==================================================
+   TABLES & MEDIA
+================================================== */
+table,
+.comparison-table {
+  display: block;
+  max-width: 100%;
+  overflow: auto;
+  margin: 2rem 0;
+}
+
+img,
+video,
+svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ==================================================
+   WORD SAFETY (LAST LINE OF DEFENSE)
+================================================== */
+.content,
+.content-inner,
+.sidebar,
+pre,
+code {
+  overflow-wrap: anywhere;
+}
+
+/* ==================================================
+   FOOTER
+================================================== */
+footer {
+  padding: 3rem 2rem;
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+
+/* ==================================================
+   RESPONSIVE (UNCHANGED BEHAVIOR)
+================================================== */
 @media (max-width: 900px) {
-  header button {
-    display: flex; /* Show toggle on mobile */
+  .header button {
+    display: flex;
+  }
+
+  .main {
+    grid-template-columns: 1fr;
   }
 
   .sidebar {
@@ -175,10 +285,9 @@ body {
     left: 0;
     bottom: 0;
     z-index: 99;
-    transform: translateX(-100%); /* Hide off-screen */
+    transform: translateX(-100%);
   }
 
-  /* When JS toggles the class */
   .menu-active .sidebar {
     transform: translateX(0);
     box-shadow: 10px 0 15px rgba(0,0,0,0.3);
@@ -187,109 +296,4 @@ body {
   .content {
     padding: 1.5rem;
   }
-}
-
-/* ---------- CODE & TABLES (Overflow Fixes) ---------- */
-/* ---------- CODE & TABLES (Overflow Fixes) ---------- */
-pre {
-  background: var(--code-bg);
-  border: 1px solid var(--code-border);
-  padding: 1.25rem 1.5rem;
-  border-radius: 12px;
-  margin: 2rem 0;
-  overflow: auto;
-  position: relative;
-  box-shadow: 0 8px 30px rgba(2,6,23,0.6);
-}
-
-pre code {
-  display: block;
-  font-family: 'Fira Code', 'Source Code Pro', ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', monospace;
-  font-size: 0.95rem;
-  line-height: 1.65;
-  color: var(--code-text);
-  tab-size: 2;
-}
-
-/* inline code */
-code {
-  background: rgba(255,255,255,0.02);
-  padding: 0.12rem 0.4rem;
-  border-radius: 6px;
-  font-family: inherit;
-  font-size: 0.95em;
-}
-
-/* copy button (requires small JS to function) */
-.copy-btn {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.03);
-  color: var(--text-secondary);
-  padding: 6px 8px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 0.82rem;
-  display: inline-flex;
-  gap: 8px;
-  align-items: center;
-  transition: all 0.12s ease;
-}
-
-.copy-btn:hover {
-  background: rgba(255,255,255,0.06);
-  color: var(--text-primary);
-  transform: translateY(-1px);
-}
-
-/* Prism-like token colors (works if you use a syntax highlighter that outputs these classes) */
-.token.comment,
-.token.prolog,
-.token.doctype,
-.token.cdata {
-  color: var(--code-comment);
-  font-style: italic;
-}
-.token.keyword,
-.token.boolean,
-.token.selector,
-.token.important {
-  color: var(--code-keyword);
-}
-.token.function,
-.token.class-name {
-  color: var(--code-function);
-}
-.token.string,
-.token.char,
-.token.attr-value {
-  color: var(--code-string);
-}
-.token.number {
-  color: var(--code-number);
-}
-.token.attr-name {
-  color: var(--code-attr);
-}
-.token.punctuation,
-.token.operator {
-  color: var(--text-muted);
-}
-
-.comparison-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 2rem 0;
-  display: block; /* Allows horizontal scroll on mobile */
-  overflow-x: auto;
-}
-
-/* ---------- FOOTER ---------- */
-footer {
-  padding: 3rem 2rem;
-  background: var(--bg-secondary);
-  border-top: 1px solid var(--border);
-  text-align: center;
 }

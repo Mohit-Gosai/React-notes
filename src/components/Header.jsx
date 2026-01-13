@@ -2,10 +2,16 @@ function Header({ toggleMenu }) {
   return (
     <header className="header">
       <div>
-      <h1>📘 React Notes</h1>
-      <p>Learn React from basics to essentials</p>
+        <h1>📘 React Notes</h1>
+        <p>Learn React from basics to essentials</p>
       </div>
-      <button onClick={toggleMenu} >≡</button>
+      <button
+        className="menu-toggle"
+        aria-label="Toggle menu"
+        onClick={toggleMenu}
+      >
+        ≡
+      </button>
     </header>
   );
 }

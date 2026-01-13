@@ -1,7 +1,7 @@
 import Header from "./components/Header.jsx";
 import Sidebar from "./components/Sidebar.jsx";
 import { Outlet } from "react-router-dom";
-import { useState } from "react"; // Add this line!
+import { useState } from "react";
 import Footer from "./components/Footer.jsx";
 
 function App() {
@@ -9,22 +9,26 @@ function App() {
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
-    <div className="app">
-      <div className={`app ${isMenuOpen ? "menu-active" : ""}`}>
-        <Header toggleMenu={() => setIsMenuOpen(!isMenuOpen)} />
-        <div className="main">
-          <Sidebar />
-          {/* New wrapper for content + footer */}
-          <div className="content-area">
-            <div className="content">
-              <div className="content-inner">
-                <Outlet />
-              </div>
+    <div className={`app ${isMenuOpen ? "menu-active" : ""}`}>
+      <Header toggleMenu={toggleMenu} />
+      <div className="main">
+        <Sidebar closeMenu={() => setIsMenuOpen(false)} />
+        {/* New wrapper for content + footer */}
+        <div className="content-area">
+          <div className="content">
+            <div className="content-inner">
+              <Outlet />
             </div>
           </div>
         </div>
-            <Footer />
       </div>
+      <Footer />
+
+      {/* overlay to close sidebar on small screens */}
+       <div
+        className={`overlay ${isMenuOpen ? "active" : ""}`}
+        onClick={() => setIsMenuOpen(false)}
+      />
     </div>
   );
 }

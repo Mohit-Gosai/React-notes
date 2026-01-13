@@ -1,23 +1,26 @@
 import { Link } from "react-router-dom";
 
-function Sidebar() {
-  
+function Sidebar({ closeMenu }) {
+  const close = () => {
+    if (closeMenu) closeMenu();
+  };
+
   return (
     <aside className="sidebar">
       <h3>Kick Start</h3>
-      <Link to="">Introduction</Link>
-      <Link to="/jsxPage">JSX</Link>
-      <Link to="/componentsPage">Components</Link>
-      <Link to="/propsPage">Props</Link>
-      <Link to="/statePage">State</Link>
-      <Link to="/hooksPage">Hooks</Link>
-      <Link to="/reactRouterPage">React Router DOM</Link>
+      <Link to="/" onClick={close} >Introduction</Link>
+      <Link to="/JSXPage" onClick={close}>JSX</Link>
+      <Link to="/ComponentsPage" onClick={close}>Components</Link>
+      <Link to="/PropsPage" onClick={close}>Props</Link>
+      <Link to="/StatePage" onClick={close}>State</Link>
+      <Link to="/HooksPage" onClick={close}>Hooks</Link>
+      <Link to="/ReactRouterPage" onClick={close}>React Router DOM</Link>
       <h3>Core Concepts</h3>
-      <Link to="/data-flow">Data Flow</Link>
-      <Link to="/component-lifecycle">Conponent Lifecycle</Link>
-      <Link to="/state-vs-props" >State VS Props</Link>
-      <Link to="/rendering-virtual-dom">Rendering & Virtual DOM</Link>
-      <Link to="/controlled-components">Controlled Components</Link>
+      <Link to="/data-flow" onClick={close}>Data Flow</Link>
+      <Link to="/component-lifecycle" onClick={close}>Conponent Lifecycle</Link>
+      <Link to="/state-vs-props" onClick={close} >State VS Props</Link>
+      <Link to="/rendering-virtual-dom" onClick={close}>Rendering & Virtual DOM</Link>
+      <Link to="/controlled-components" onClick={close}>Controlled Components</Link>
     </aside>
   );
 }
